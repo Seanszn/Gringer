@@ -90,7 +90,7 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
              try {
                 try {
                     int i = printFrames(pathField.getText());
-                    frameLabel.setText(String.valueOf(i));
+                    frameLabel.setText(String.valueOf(i) + " Frames in the clip");
                 } catch (LineUnavailableException e1) {
                     System.out.println("Line Unavailable");
                     }
