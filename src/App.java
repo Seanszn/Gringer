@@ -41,17 +41,18 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
     btFrames.setText("Get frames");
 
     Label EndLab = new Label();
-    //Label voiceLab = new Label();
     Label pathLab = new Label();
     Label posLabel = new Label();
     Label randLabel = new Label();
     Label title = new Label();
     Label frameLabel = new Label();
+    Label secsLabel = new Label();
 
     TextField EndField = new TextField();
     TextField pathField = new TextField();
     TextField posField = new TextField();
     TextField randField = new TextField();
+    TextField secsField = new TextField();
 
     EndLab.setText("\tWhat percent of the clip should the end position be?");
     EndLab.setTextFill(Color.WHITE);
@@ -65,6 +66,8 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
     title.setFont(new Font("Courier New",20));
     title.setTextFill(Color.WHITE);
     frameLabel.setTextFill(Color.WHITE);
+    secsLabel.setText("How many seconds would you like this program to run for?");
+    secsLabel.setTextFill(Color.WHITE);
 
     pane.add(title, 1,0);
     pane.add(pathLab,0,2);
@@ -78,6 +81,8 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
     pane.add(btSound,0,10);
     pane.add(btFrames,0,12);
     pane.add(frameLabel,1,12);
+    pane.add(secsLabel,0,6);
+    pane.add(secsField,0,7);
 
     btFrames.setOnAction(new EventHandler<ActionEvent>() {
         @Override
@@ -106,7 +111,8 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
                 String end = EndField.getText();
                 String rand = randField.getText();
                 String start = posField.getText();
-                startSound(path, rand, start, end);
+                String secs = secsField.getText();
+                startSound(path, rand, start, end, secs);
             } catch (UnsupportedAudioFileException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
@@ -128,26 +134,27 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
     pstage.show();
 }
 
-public static void startSound(String path, String rand, String start, String end) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+public static void startSound(String path, String rand, String start, String end, String seconds) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
     Clip clip;
     AudioInputStream audioInputStream;
     audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
     clip = AudioSystem.getClip();
     clip.open(audioInputStream);
+
     int frames = clip.getFrameLength();
     double startPos = Double.parseDouble(start)/100 * frames;
     double endPos = Double.parseDouble(end)/100 * frames;
     Random randResult = new Random();
+    int numSeconds = Integer.parseInt(seconds);
+    long numMillis = numSeconds * 1000;
+
     clip.setLoopPoints((int)startPos, (int)endPos);
     clip.loop(Clip.LOOP_CONTINUOUSLY);
     long startTime = System.currentTimeMillis();
-    //int lebron = 100000;
-    while(System.currentTimeMillis() != startTime + 20000){
+    while(System.currentTimeMillis() != startTime + numMillis){
         int startRand = (int)startPos + randResult.nextInt(Integer.parseInt(rand));
         int endRand = (int)endPos + randResult.nextInt(Integer.parseInt(rand));
         clip.setLoopPoints(startRand, endRand);
-        //System.out.println(lebron);
-        //lebron--;
     }
     clip.close();
 }
