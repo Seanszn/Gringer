@@ -46,6 +46,7 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
     Label posLabel = new Label();
     Label randLabel = new Label();
     Label title = new Label();
+    Label frameLabel = new Label();
 
     TextField EndField = new TextField();
     TextField pathField = new TextField();
@@ -63,6 +64,7 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
     title.setText("SoundStage");
     title.setFont(new Font("Courier New",20));
     title.setTextFill(Color.WHITE);
+    frameLabel.setTextFill(Color.WHITE);
 
     pane.add(title, 1,0);
     pane.add(pathLab,0,2);
@@ -75,13 +77,15 @@ public void start(Stage pstage) throws UnsupportedAudioFileException, IOExceptio
     pane.add(randField,1,3);
     pane.add(btSound,0,10);
     pane.add(btFrames,0,12);
+    pane.add(frameLabel,1,12);
 
     btFrames.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent e){
-            try {
+             try {
                 try {
-                    printFrames(pathField.getText());
+                    int i = printFrames(pathField.getText());
+                    frameLabel.setText(String.valueOf(i));
                 } catch (LineUnavailableException e1) {
                     System.out.println("Line Unavailable");
                     }
@@ -148,7 +152,7 @@ public static void startSound(String path, String rand, String start, String end
     clip.close();
 }
 
-public static void printFrames(String path) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+public static int printFrames(String path) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
     Clip clip;
     AudioInputStream audioInputStream;
     audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
@@ -157,5 +161,6 @@ public static void printFrames(String path) throws UnsupportedAudioFileException
     System.out.println(clip.getFrameLength());
     clip.close();
     audioInputStream.close();
+    return clip.getFrameLength();
 }
 }
