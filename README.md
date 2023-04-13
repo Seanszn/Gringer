@@ -8,4 +8,8 @@ Next, input how many frames you would like the starting and ending position of t
 
 Next, input whatever percentage of the clip you would like to be the start point and the end point. (Ex. if you would like a clip to start from the halfway point enter "50")
 
-Finally, press the start button and let the audio play for the next 10 seconds.
+Next, input however many seconds you would like the sound to loop for in the associated text field.
+
+Finally, press start and let the program run, looping the sound for the desired  time (Note: the program always starts at the beginning and only begins the desired loop when the stated end position has been reached for the first time.)
+
+Find your desired settings and then record your computer to get the sound created by the program.
