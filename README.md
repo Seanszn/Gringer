@@ -1,18 +1,7 @@
-## Getting Started
+Welcome to Soundstage, an application used to turn a sample into a looping atmospheric soundscape.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
-
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+INSTRUCTIONS:
+First, copy the path to a wav audio file into the text box for a file path.
+Next, input how many frames you would like the starting and ending position of the loop to be randomized by. You can press the "Get Frames" button to see how many frames are in the audio clip you have input.
+Next, input whatever percentage of the clip you would like to be the start point and the end point. (Ex. if you would like a clip to start from the halfway point enter "50")
+Finally, press the start button and let the audio play for the next 10 seconds.
